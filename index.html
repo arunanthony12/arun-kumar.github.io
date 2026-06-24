@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arun Kumar — Systems & Embedded Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bg2: #0f1520;
+    --bg3: #141d2b;
+    --surface: #192236;
+    --border: #1e2d47;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7c3aed;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --green: #00ff9d;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: rgba(10,14,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  h1 span {
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.9;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    padding: 14px 32px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SCROLLING TICKER */
+  .ticker {
+    background: var(--bg3);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 30s linear infinite;
+    gap: 0;
+  }
+
+  .ticker-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    padding: 0 24px;
+  }
+
+  .ticker-item span { color: var(--accent); margin-right: 8px; }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 60px;
+    color: var(--text);
+  }
+
+  .section-title strong { font-weight: 600; }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    divide: var(--border);
+  }
+
+  .stat {
+    padding: 40px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .exp-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .exp-item:hover { border-color: rgba(0,212,255,0.3); }
+
+  .exp-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 28px 32px;
+    cursor: pointer;
+    gap: 16px;
+  }
+
+  .exp-role {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  .exp-body {
+    padding: 0 32px 28px;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-body ul {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .exp-body li {
+    font-size: 14px;
+    color: var(--text-dim);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-body li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2px;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    border-radius: 4px;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover { border-color: rgba(0,212,255,0.2); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-icon {
+    font-family: var(--mono);
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .project-name {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .project-outcome {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    padding: 8px 12px;
+    background: rgba(0,255,157,0.05);
+    border: 1px solid rgba(0,255,157,0.15);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent3);
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.2);
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+  }
+
+  .skill-group {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 4px;
+  }
+
+  .skill-group-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .skill-item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* AI EVALUATOR */
+  .ai-section {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 40px;
+    border-radius: 4px;
+    margin-bottom: 60px;
+  }
+
+  .ai-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .ai-tool {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-dim);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-tool .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* CONTACT */
+  .contact-section {
+    text-align: center;
+    padding: 100px 40px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-heading {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .contact-sub {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* TERMINAL DECORATION */
+  .terminal-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 40px;
+    max-width: 540px;
+  }
+
+  .terminal-header {
+    background: var(--bg3);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .terminal-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .terminal-body {
+    padding: 20px 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 2;
+    color: var(--text-muted);
+  }
+
+  .terminal-body .cmd { color: var(--green); }
+  .terminal-body .val { color: var(--accent); }
+  .terminal-body .str { color: var(--accent2); }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    section { padding: 60px 20px; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .exp-header { grid-template-columns: 1fr; }
+    .contact-section { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">arun_kumar.sys</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:100%; padding-left:40px; padding-right:40px;">
+  <div class="hero-grid">
+    <div class="hero-eyebrow">Systems & Infrastructure Engineer</div>
+    <h1>Arun<br><span>Kumar</span></h1>
+
+    <div class="terminal-block">
+      <div class="terminal-header">
+        <div class="terminal-dot" style="background:#ff5f57"></div>
+        <div class="terminal-dot" style="background:#febc2e"></div>
+        <div class="terminal-dot" style="background:#28c840"></div>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--text-muted);margin-left:8px;">profile.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="cmd">$</span> cat engineer.profile</div>
+        <div><span class="val">role</span>      → <span class="str">Embedded & AI Evaluator</span></div>
+        <div><span class="val">exp</span>       → <span class="str">3+ years systems engineering</span></div>
+        <div><span class="val">stack</span>     → <span class="str">C++, ARM, Linux, RTOS</span></div>
+        <div><span class="val">location</span>  → <span class="str">Chennai, India</span></div>
+        <div><span class="val">status</span>    → <span style="color:var(--green)">● Open to opportunities</span></div>
+      </div>
+    </div>
+
+    <div class="hero-tags" style="margin-top:32px;">
+      <div class="tag">Bare-Metal Embedded</div>
+      <div class="tag">ARM Cortex-M4</div>
+      <div class="tag">Linux Systems</div>
+      <div class="tag">RTOS / CAN Bus</div>
+      <div class="tag">AI Code Evaluator</div>
+      <div class="tag">C++ / C / Python</div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="mailto:arunanthony47@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="https://www.linkedin.com/in/arun-kumar-619358210" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span>▸</span> STM32 Bare-Metal</span>
+    <span class="ticker-item"><span>▸</span> ARM Cortex-M4</span>
+    <span class="ticker-item"><span>▸</span> CAN Bus / RTOS</span>
+    <span class="ticker-item"><span>▸</span> Linux Systems</span>
+    <span class="ticker-item"><span>▸</span> AI Evaluation</span>
+    <span class="ticker-item"><span>▸</span> C++ Systems</span>
+    <span class="ticker-item"><span>▸</span> Distributed Systems</span>
+    <span class="ticker-item"><span>▸</span> BIOS Firmware</span>
+    <span class="ticker-item"><span>▸</span> Concurrency & Mutexes</span>
+    <span class="ticker-item"><span>▸</span> TCP/IP Stack</span>
+    <span class="ticker-item"><span>▸</span> Claude Code · Gemini CLI · Cursor</span>
+    <span class="ticker-item"><span>▸</span> STM32 Bare-Metal</span>
+    <span class="ticker-item"><span>▸</span> ARM Cortex-M4</span>
+    <span class="ticker-item"><span>▸</span> CAN Bus / RTOS</span>
+    <span class="ticker-item"><span>▸</span> Linux Systems</span>
+    <span class="ticker-item"><span>▸</span> AI Evaluation</span>
+    <span class="ticker-item"><span>▸</span> C++ Systems</span>
+    <span class="ticker-item"><span>▸</span> Distributed Systems</span>
+    <span class="ticker-item"><span>▸</span> BIOS Firmware</span>
+    <span class="ticker-item"><span>▸</span> Concurrency & Mutexes</span>
+    <span class="ticker-item"><span>▸</span> TCP/IP Stack</span>
+    <span class="ticker-item"><span>▸</span> Claude Code · Gemini CLI · Cursor</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">AI Solutions Reviewed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Embedded Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8.26</div>
+      <div class="stat-label">CGPA (B.E. ECE)</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career History</div>
+  <div class="section-title">Where I've <strong>worked</strong></div>
+
+  <div class="ai-section">
+    <div class="section-label" style="margin-bottom:8px;">Unique Edge</div>
+    <div style="font-size:17px;font-weight:600;margin-bottom:12px;">AI Evaluation + Deep Systems Expertise</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">I bring an unusual combination to AI evaluation roles: genuine bare-metal embedded systems experience (ARM, RTOS, register-level programming) combined with daily use of frontier AI coding agents. I don't just flag whether code runs — I assess it against professional engineering standards for correctness, edge cases, and architectural soundness.</p>
+    <div class="ai-tools">
+      <div class="ai-tool"><div class="dot"></div>Claude Code</div>
+      <div class="ai-tool"><div class="dot"></div>Gemini CLI</div>
+      <div class="ai-tool"><div class="dot"></div>Cursor</div>
+      <div class="ai-tool"><div class="dot"></div>Windsurf</div>
+      <div class="ai-tool"><div class="dot"></div>GitHub Copilot</div>
+      <div class="ai-tool"><div class="dot"></div>ChatGPT / Codex</div>
+    </div>
+  </div>
+
+  <div class="exp-list">
+    <div class="exp-item fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Technical Subject Matter Expert & AI Evaluator</div>
+          <div class="exp-company">Freelance</div>
+        </div>
+        <div class="exp-date">Jun 2025 – Present</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Reviewed 50+ AI-generated engineering solutions in C++, Python, and Linux systems — evaluating correctness, edge cases, and implementation quality against professional engineering standards.</li>
+          <li>Assessed systems-level code for concurrency bugs, race conditions, memory management issues, and architectural tradeoffs across OS, networking, and infrastructure domains.</li>
+          <li>Compared outputs from frontier AI coding agents (Claude Code, Gemini CLI, Cursor, GitHub Copilot) to benchmark correctness, scalability, and engineering judgment across complex systems tasks.</li>
+          <li>Produced detailed technical documentation on Linux programming patterns and concurrency debugging workflows for use in AI evaluation pipelines.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Hardware & Firmware Specialist</div>
+          <div class="exp-company">Self-Employed</div>
+        </div>
+        <div class="exp-date">May 2022 – Present</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Performed chip-level diagnostics and component-level failure analysis on laptop and desktop hardware — tracing faults through power delivery circuits, memory subsystems, and peripheral interfaces using multimeters and oscilloscopes.</li>
+          <li>Executed BIOS firmware programming, editing, and optimisation — modifying low-level firmware configurations and resolving boot-sequence failures caused by corrupted or misconfigured firmware.</li>
+          <li>Recovered data and restored functionality across hardware failure scenarios using structured fault-isolation techniques at the hardware-software boundary.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Embedded Systems Engineer — Training & Project</div>
+          <div class="exp-company">Vector India, Chennai</div>
+        </div>
+        <div class="exp-date">May 2024 – Dec 2024</div>
+      </div>
+      <div class="exp-body">
+        <ul>
+          <li>Completed an intensive 6-month professional programme in Embedded Systems, Linux Programming, RTOS, C++, and TCP/IP networking.</li>
+          <li>Designed and implemented a distributed real-time embedded control system (Body Control Module) with multi-node CAN bus communication — addressing bus arbitration, message scheduling, and real-time responsiveness under concurrent load.</li>
+          <li>Developed state-machine-based control logic in Embedded C/C++ for automotive subsystems under RTOS scheduling constraints.</li>
+          <li>Studied TCP/IP protocol stack fundamentals including socket programming, transport-layer behaviour, and connection management.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg2);max-width:100%;padding-left:40px;padding-right:40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">Engineering Work</div>
+    <div class="section-title">Technical <strong>Projects</strong></div>
+
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-icon">⚙️</div>
+        <div class="project-name">Bare-Metal Battleship Game Engine</div>
+        <div class="project-desc">Full game engine on STM32F429I-DISC1 with no RTOS, no HAL, no middleware. FSM-driven game state, hardware RNG AI opponent, and full touchscreen + LCD pipeline implemented from scratch at register level.</div>
+        <div class="project-outcome">✓ Deployed on hardware — production-quality binary with no debug overhead</div>
+        <div class="project-stack">
+          <span class="stack-tag">Embedded C</span>
+          <span class="stack-tag">ARM Cortex-M4</span>
+          <span class="stack-tag">SPI / I2C</span>
+          <span class="stack-tag">LTDC</span>
+          <span class="stack-tag">STMPE811</span>
+          <span class="stack-tag">SDRAM</span>
+          <span class="stack-tag">Keil MDK</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-icon">🕐</div>
+        <div class="project-name">Low-Level Clock & Peripherals (STM32)</div>
+        <div class="project-desc">Configured core clock architecture (RCC) and PLL from scratch on ARM Cortex-M4 without any HAL. Raw bare-metal peripheral drivers via direct register manipulation, with SysTick-based high-precision timing subroutines.</div>
+        <div class="project-outcome">✓ Fully verified via ST-Link debugger — register-state and GPIO timing confirmed</div>
+        <div class="project-stack">
+          <span class="stack-tag">Embedded C</span>
+          <span class="stack-tag">RCC / PLL</span>
+          <span class="stack-tag">SysTick</span>
+          <span class="stack-tag">GPIO</span>
+          <span class="stack-tag">ST-Link</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-icon">🚗</div>
+        <div class="project-name">Body Control Module — CAN Bus</div>
+        <div class="project-desc">Distributed real-time control architecture with multi-node CAN bus. Automotive subsystem state machines for lighting, wiper, power window, and door lock — coordinating distributed behaviour under RTOS with strict timing guarantees.</div>
+        <div class="project-outcome">✓ Stable multi-node system — fault-tolerant, real-time validated under concurrent load</div>
+        <div class="project-stack">
+          <span class="stack-tag">C / C++</span>
+          <span class="stack-tag">CAN Protocol</span>
+          <span class="stack-tag">RTOS</span>
+          <span class="stack-tag">GDB</span>
+          <span class="stack-tag">GCC Toolchain</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-icon">🔔</div>
+        <div class="project-name">IoT Smart Doorbell — Assistive Tech</div>
+        <div class="project-desc">Edge ML system on Raspberry Pi integrating deep learning object detection with real-time cross-platform notifications via IFTTT webhooks. Designed for deaf individuals — instant visual/push alerts for visitor events.</div>
+        <div class="project-outcome">✓ End-to-end working system — edge inference + cloud notification pipeline</div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Raspberry Pi</span>
+          <span class="stack-tag">Deep Learning</span>
+          <span class="stack-tag">IFTTT</span>
+          <span class="stack-tag">NumPy / Pandas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Stack</div>
+  <div class="section-title">What I <strong>know</strong></div>
+
+  <div class="skills-grid">
+    <div class="skill-group fade-in">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-items">
+        <div class="skill-item">C++</div>
+        <div class="skill-item">C</div>
+        <div class="skill-item">Embedded C</div>
+        <div class="skill-item">Python</div>
+      </div>
+    </div>
+
+    <div class="skill-group fade-in">
+      <div class="skill-group-title">Embedded & Hardware</div>
+      <div class="skill-items">
+        <div class="skill-item">ARM Cortex-M4</div>
+        <div class="skill-item">STM32</div>
+        <div class="skill-item">Bare-Metal</div>
+        <div class="skill-item">SPI / I2C</div>
+        <div class="skill-item">CAN Bus</div>
+        <div class="skill-item">RTOS</div>
+        <div class="skill-item">BIOS Firmware</div>
+        <div class="skill-item">RCC / PLL</div>
+        <div class="skill-item">SysTick / GPIO</div>
+        <div class="skill-item">SDRAM / LTDC</div>
+      </div>
+    </div>
+
+    <div class="skill-group fade-in">
+      <div class="skill-group-title">Systems & OS</div>
+      <div class="skill-items">
+        <div class="skill-item">Linux</div>
+        <div class="skill-item">Multithreading</div>
+        <div class="skill-item">Mutex / Semaphores</div>
+        <div class="skill-item">Memory Mgmt</div>
+        <div class="skill-item">TCP/IP Stack</div>
+        <div class="skill-item">Socket Programming</div>
+        <div class="skill-item">GDB Debugging</div>
+      </div>
+    </div>
+
+    <div class="skill-group fade-in">
+      <div class="skill-group-title">Tools & AI Agents</div>
+      <div class="skill-items">
+        <div class="skill-item">Claude Code</div>
+        <div class="skill-item">Gemini CLI</div>
+        <div class="skill-item">Cursor</div>
+        <div class="skill-item">Windsurf</div>
+        <div class="skill-item">Copilot</div>
+        <div class="skill-item">Keil MDK</div>
+        <div class="skill-item">STM32CubeIDE</div>
+        <div class="skill-item">Git / GCC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center;display:flex;margin-bottom:16px;">Available for work</div>
+    <div class="contact-heading">Let's build something <strong>serious</strong>.</div>
+    <div class="contact-sub">Open to embedded systems roles, AI evaluation contracts, and systems engineering positions. Based in Chennai — open to remote.</div>
+    <div class="contact-links">
+      <a href="mailto:arunanthony47@gmail.com" class="btn-primary">arunanthony47@gmail.com</a>
+      <a href="https://www.linkedin.com/in/arun-kumar-619358210" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Arun Kumar — Systems & Infrastructure Engineer &nbsp;·&nbsp; Chennai, India
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
