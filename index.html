@@ -34,9 +34,9 @@
   --radius-lg: 16px;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    RESET & BASE
-═══════════════════════════════════════════ */
+*/
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; font-size:15px; }
 body {
@@ -50,9 +50,9 @@ body {
 img { display:block; max-width:100%; }
 a { text-decoration:none; color:inherit; }
 
-/* ═══════════════════════════════════════════
+/*
    LAYOUT HELPERS
-═══════════════════════════════════════════ */
+*/
 .wrap {
   width: 100%;
   max-width: var(--max-w);
@@ -60,9 +60,9 @@ a { text-decoration:none; color:inherit; }
   padding-inline: var(--pad-x);
 }
 
-/* ═══════════════════════════════════════════
+/* 
    NAV
-═══════════════════════════════════════════ */
+*/
 nav {
   position: fixed;
   inset: 0 0 auto 0;
@@ -162,9 +162,9 @@ nav {
   line-height: 1;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    HERO
-═══════════════════════════════════════════ */
+*/
 .hero {
   min-height: 100svh;
   display: flex;
@@ -399,9 +399,9 @@ h1 strong {
   margin-right:5px;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    TICKER
-═══════════════════════════════════════════ */
+*/
 .ticker {
   background: var(--bg3);
   border-top: 1px solid var(--border);
@@ -428,9 +428,9 @@ h1 strong {
 .ticker-item span { color:var(--accent); margin-right:6px; }
 .ticker:hover .ticker-inner { animation-play-state: paused; }
 
-/* ═══════════════════════════════════════════
+/* 
    STATS
-═══════════════════════════════════════════ */
+*/
 .stats-bar {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
@@ -469,9 +469,9 @@ h1 strong {
   text-transform: uppercase;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    SECTION WRAPPER
-═══════════════════════════════════════════ */
+*/
 .section {
   padding-block: var(--section-y);
   padding-inline: var(--pad-x);
@@ -507,9 +507,9 @@ h1 strong {
 }
 .section-title strong { font-weight: 700; }
 
-/* ═══════════════════════════════════════════
+/* 
    EXPERIENCE
-═══════════════════════════════════════════ */
+*/
 /* AI callout */
 .ai-callout {
   background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(124,58,237,0.04));
@@ -638,9 +638,9 @@ h1 strong {
   line-height: 1.45;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    PROJECTS
-═══════════════════════════════════════════ */
+*/
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -759,9 +759,9 @@ h1 strong {
   border-radius: 3px;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    SKILLS
-═══════════════════════════════════════════ */
+*/
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -829,9 +829,9 @@ h1 strong {
   background: rgba(0,212,255,0.04);
 }
 
-/* ═══════════════════════════════════════════
+/* 
    CONTACT
-═══════════════════════════════════════════ */
+*/
 .contact-section {
   padding-block: var(--section-y);
   padding-inline: var(--pad-x);
@@ -910,9 +910,9 @@ h1 strong {
   line-height: 1.4;
 }
 
-/* ═══════════════════════════════════════════
+/*
    FOOTER
-═══════════════════════════════════════════ */
+*/
 footer {
   background: var(--bg);
   border-top: 1px solid var(--border);
@@ -924,9 +924,9 @@ footer {
   letter-spacing: 0.06em;
 }
 
-/* ═══════════════════════════════════════════
+/* 
    ANIMATIONS
-═══════════════════════════════════════════ */
+*/
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(22px); }
   to   { opacity:1; transform:translateY(0); }
@@ -970,9 +970,9 @@ footer {
 .delay-3 { transition-delay: 0.24s !important; }
 .delay-4 { transition-delay: 0.32s !important; }
 
-/* ═══════════════════════════════════════════
+/* 
    RESPONSIVE — fluid, no gaps
-═══════════════════════════════════════════ */
+*/
 @media (max-width: 1023px) {
   .hero-inner { grid-template-columns: 1fr; gap: 36px; }
   .hero-inner .terminal-block { max-width: 540px; }
@@ -1022,9 +1022,9 @@ footer {
   html { font-size: 16px; }
 }
 
-/* ═══════════════════════════════════════════
+/*
    EXPERIENCE SECTION — SIGNAL BARS ANIMATION
-═══════════════════════════════════════════ */
+*/
 .exp-signal {
   display: inline-flex;
   align-items: flex-end;
@@ -1050,9 +1050,9 @@ footer {
   50%      { transform: scaleY(1);   opacity: 1;    }
 }
 
-/* ═══════════════════════════════════════════
+/* 
    PROJECTS SECTION — CODE TAG ANIMATION
-═══════════════════════════════════════════ */
+ */
 .proj-code-anim {
   display: inline-flex;
   align-items: center;
@@ -1089,9 +1089,9 @@ footer {
             text-shadow: 0 0 12px rgba(0,212,255,0.8); }
 }
 
-/* ═══════════════════════════════════════════
+/*
    SKILLS SECTION — ORBIT RING ANIMATION
-═══════════════════════════════════════════ */
+*/
 .skills-orbit {
   display: inline-flex;
   align-items: center;
@@ -1161,7 +1161,7 @@ footer {
 
 <!-- NAV -->
 <nav id="mainNav">
-  <div class="nav-logo">Portfolio (HTML,CSS,and vanilla JavaScript)</div>
+  <div class="nav-logo">Portfolio</div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#experience" onclick="navScroll('experience')">Experience</a></li>
     <li><a href="#projects"   onclick="navScroll('projects')">Projects</a></li>
@@ -1223,7 +1223,7 @@ footer {
           <span style="color:var(--text-muted)"><span class="spin-char" style="color:var(--accent)">⠋</span>&nbsp;<span class="spin-text">Loading .</span></span>
         </div>
         <div class="terminal-line pending" data-step="role">
-          <span class="val">role</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → <span class="str typing-target" data-text="System Enginner, Tech SME & AI Evaluator"></span>
+          <span class="val">role</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → <span class="str typing-target" data-text="Sys Engineer,TechSME & AI Evaluator"></span>
         </div>
         <div class="terminal-line pending" data-step="exp">
           <span class="val">exp</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; → <span class="str typing-target" data-text="3+ years systems engineering"></span>
